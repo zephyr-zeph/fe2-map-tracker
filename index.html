@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FE2 Map Tracker</title>
-<link rel="icon" href="/fe2-map-tracker/favicon.ico">
 <link href="https://fonts.googleapis.com/css2?family=Iosevka+Charon:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -46,24 +45,24 @@
     overflow-x: hidden;
   }
   body.light {
-    --bg:        #f5f5f7;
-    --bg2:       #ffffff;
-    --bg3:       #f0f0f3;
-    --bg4:       #e4e4ea;
-    --border:    #dddddd;
-    --border2:   #cccccc;
-    --text:      #1a1a1a;
-    --muted:     #666677;
-    --dim:       #9999aa;
-  
-    --prog-none:     #dddddd;
-    --prog-concept:  #cce4ff;
-    --prog-building: #ffe7b3;
-    --prog-deco:     #e6ccff;
-    --prog-testing:  #cceedd;
-    --prog-done:     #ccffcc;
-    --prog-donebutmissing: #e6f2b3;
-  }
+  --bg:        #f5f5f7;
+  --bg2:       #ffffff;
+  --bg3:       #f0f0f3;
+  --bg4:       #e4e4ea;
+  --border:    #dddddd;
+  --border2:   #cccccc;
+  --text:      #1a1a1a;
+  --muted:     #666677;
+  --dim:       #9999aa;
+
+  --prog-none:     #dddddd;
+  --prog-concept:  #cce4ff;
+  --prog-building: #ffe7b3;
+  --prog-deco:     #e6ccff;
+  --prog-testing:  #cceedd;
+  --prog-done:     #ccffcc;
+  --prog-donebutmissing: #e6f2b3;
+}
 
   /*  HEADER  */
   header {
@@ -594,12 +593,12 @@
     <p>A site to log your map ideas </p>
   </div>
   <div class="header-actions">
-    <button class="btn" id="export-btn">↓ Export</button>
-    <button class="btn" id="import-btn">↑ Import</button>
-    <input type="file" id="import-file" accept=".json" style="display:none">
-    <button class="btn btn-primary" id="add-btn">+ Add Map</button>
-    <button class="btn" id="theme-toggle">☀</button>
-  </div>
+  <button class="btn" id="export-btn">↓ Export</button>
+  <button class="btn" id="import-btn">↑ Import</button>
+  <input type="file" id="import-file" accept=".json" style="display:none">
+  <button class="btn btn-primary" id="add-btn">+ Add Map</button>
+  <button class="btn" id="theme-toggle">☀</button>
+</div>
 </header>
 
 <div class="stats-bar" id="stats-bar"></div>
@@ -700,7 +699,7 @@
 <div id="toast"></div>
 
 <script>
-const themeToggle = document.getElementById("theme-toggle");
+  const themeToggle = document.getElementById("theme-toggle");
 
 // load saved theme
 if (localStorage.getItem("theme") === "light") {
@@ -708,18 +707,15 @@ if (localStorage.getItem("theme") === "light") {
 }
 
 // toggle
-if (themeToggle) {
-  themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("light");
-  
-    if (document.body.classList.contains("light")) {
-      localStorage.setItem("theme", "light");
-    } else {
-      localStorage.setItem("theme", "dark");
-    }
-  });
-}
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("light");
 
+  if (document.body.classList.contains("light")) {
+    localStorage.setItem("theme", "light");
+  } else {
+    localStorage.setItem("theme", "dark");
+  }
+});
 function updateThemeIcon() {
   themeToggle.textContent =
     document.body.classList.contains("light") ? "🌙" : "☀";
@@ -885,6 +881,7 @@ function renderGrid() {
           <div>
             <div class="card-title-row">
               <span class="diff-pill" style="background:${col}22;color:${col};border:1px solid ${col}44">${m.diff}</span>
+              <span class="card-name">${m.name}
             </div>
             <div class="stars-row" style="margin-top:5px">
               <span class="stars">${starBar(m.stars)}</span>
@@ -1075,22 +1072,6 @@ loadMaps();
 renderFilters();
 renderStats();
 renderGrid();
-
-window.addEventListener("load", () => {
-  const themeToggle = document.getElementById("theme-toggle");
-  
-  if (!themeToggle) return;
-  
-  themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("light");
-  
-    if (document.body.classList.contains("light")) {
-      localStorage.setItem("theme", "light");
-    } else {
-      localStorage.setItem("theme", "dark");
-    }
-  });
-});
 </script>
 </body>
 </html>
