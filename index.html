@@ -707,15 +707,18 @@ if (localStorage.getItem("theme") === "light") {
 }
 
 // toggle
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("light");
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("light");
+  
+    if (document.body.classList.contains("light")) {
+      localStorage.setItem("theme", "light");
+    } else {
+      localStorage.setItem("theme", "dark");
+    }
+  });
+}
 
-  if (document.body.classList.contains("light")) {
-    localStorage.setItem("theme", "light");
-  } else {
-    localStorage.setItem("theme", "dark");
-  }
-});
 function updateThemeIcon() {
   themeToggle.textContent =
     document.body.classList.contains("light") ? "🌙" : "☀";
@@ -1073,6 +1076,22 @@ loadMaps();
 renderFilters();
 renderStats();
 renderGrid();
+
+window.addEventListener("load", () => {
+  const themeToggle = document.getElementById("theme-toggle");
+  
+  if (!themeToggle) return;
+  
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("light");
+  
+    if (document.body.classList.contains("light")) {
+      localStorage.setItem("theme", "light");
+    } else {
+      localStorage.setItem("theme", "dark");
+    }
+  });
+});
 </script>
 </body>
 </html>
