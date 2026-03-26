@@ -877,7 +877,6 @@ function renderGrid() {
   grid.innerHTML = list.map(m => {
     const col = DIFF_COLORS[m.diff] || "#888";
     const dk = diffKey(m.diff);
-    const isCustom = m.tags && m.tags.includes("pix-map");
     return `
     <div class="card${m.progress==='done'?' done-card':''} border-${dk}" data-id="${m.id}">
       <div class="card-accent" style="background:${col}22;border-bottom:1px solid ${col}44"></div>
@@ -886,7 +885,6 @@ function renderGrid() {
           <div>
             <div class="card-title-row">
               <span class="diff-pill" style="background:${col}22;color:${col};border:1px solid ${col}44">${m.diff}</span>
-              <span class="card-name">${m.name}${isCustom?' <span style="font-size:.6rem;color:var(--crazy);font-family:Space Mono,monospace">★ pix</span>':''}</span>
             </div>
             <div class="stars-row" style="margin-top:5px">
               <span class="stars">${starBar(m.stars)}</span>
