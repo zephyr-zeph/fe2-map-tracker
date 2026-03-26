@@ -699,41 +699,20 @@
 <div id="toast"></div>
 
 <script>
-  const themeToggle = document.getElementById("theme-toggle");
+const themeToggle = document.getElementById("theme-toggle");
 
-// load saved theme
-if (localStorage.getItem("theme") === "light") {
+  if (localStorage.getItem("theme") === "light") {
   document.body.classList.add("light");
 }
 
 // toggle
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("light");
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const isLight = document.body.classList.toggle("light");
 
-  if (document.body.classList.contains("light")) {
-    localStorage.setItem("theme", "light");
-  } else {
-    localStorage.setItem("theme", "dark");
-  }
-});
-function updateThemeIcon() {
-  themeToggle.textContent =
-    document.body.classList.contains("light") ? "🌙" : "☀";
+    localStorage.setItem("theme", isLight ? "light" : "dark");
+  });
 }
-
-updateThemeIcon();
-
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("light");
-
-  if (document.body.classList.contains("light")) {
-    localStorage.setItem("theme", "light");
-  } else {
-    localStorage.setItem("theme", "dark");
-  }
-
-  updateThemeIcon();
-});
 //  DATA 
 const DIFF_ORDER = ["Beginner","Easy","Normal","Hard","Insane","Crazy","Crazy+","Extreme"];
 const DIFF_COLORS = {
@@ -1079,13 +1058,9 @@ window.addEventListener("load", () => {
   if (!themeToggle) return;
 
   themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("light");
+    const isLight = document.body.classList.toggle("light");
 
-    if (document.body.classList.contains("light")) {
-      localStorage.setItem("theme", "light");
-    } else {
-      localStorage.setItem("theme", "dark");
-    }
+    localStorage.setItem("theme", isLight ? "light" : "dark");
   });
 });
 </script>
